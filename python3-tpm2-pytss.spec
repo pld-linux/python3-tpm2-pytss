@@ -7,13 +7,13 @@
 Summary:	TPM 2.0 TSS Bindings for Python
 Summary(pl.UTF-8):	Wiązania TPM 2.0 TSS dla Pythona
 Name:		python3-tpm2-pytss
-Version:	1.2.0
+Version:	2.1.0
 Release:	1
 License:	BSD
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/tpm2-pytss/
 Source0:	https://files.pythonhosted.org/packages/source/t/tpm2-pytss/tpm2-pytss-%{version}.tar.gz
-# Source0-md5:	56e713bd151d6686997152bc53ef3d07
+# Source0-md5:	a629a192cd5a42b8d1e7ffab391de231
 URL:		https://github.com/tpm2-software/tpm2-pytss
 BuildRequires:	python3-asn1crypto
 BuildRequires:	python3-cffi >= 1.0.0
@@ -21,6 +21,7 @@ BuildRequires:	python3-cryptography >= 3.0
 BuildRequires:	python3-devel >= 1:3.7
 BuildRequires:	python3-packaging
 BuildRequires:	python3-pkgconfig
+BuildRequires:	python3-pycparser
 BuildRequires:	python3-setuptools >= 1:44
 BuildRequires:	python3-setuptools_scm >= 3.4.3
 BuildRequires:	python3-toml
@@ -34,6 +35,8 @@ BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
 BuildRequires:	sed >= 4.0
+# 3.3/4.0 when available in PLD
+BuildRequires:	tpm2-tss-devel >= 2.4
 %if %{with doc}
 BuildRequires:	python3-myst_parser
 BuildRequires:	python3-sphinx_rtd_theme
@@ -78,7 +81,7 @@ Dokumentacja API modułu Pythona tpm2-pytss.
 %prep
 %setup -q -n tpm2-pytss-%{version}
 
-# broken and not used (as of 1.2.0)
+# broken and not used (as of 2.1.0)
 %{__sed} -i -e '/^\(version\|release\) = /d' docs/conf.py
 
 %build
