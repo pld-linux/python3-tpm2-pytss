@@ -8,7 +8,7 @@ Summary:	TPM 2.0 TSS Bindings for Python
 Summary(pl.UTF-8):	Wiązania TPM 2.0 TSS dla Pythona
 Name:		python3-tpm2-pytss
 Version:	2.1.0
-Release:	1
+Release:	2
 License:	BSD
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/tpm2-pytss/
