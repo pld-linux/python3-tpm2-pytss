@@ -7,24 +7,23 @@
 Summary:	TPM 2.0 TSS Bindings for Python
 Summary(pl.UTF-8):	Wiązania TPM 2.0 TSS dla Pythona
 Name:		python3-tpm2-pytss
-Version:	2.3.0
+Version:	3.0.0
 Release:	1
 License:	BSD
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/tpm2-pytss/
-Source0:	https://files.pythonhosted.org/packages/source/t/tpm2-pytss/tpm2-pytss-%{version}.tar.gz
-# Source0-md5:	241696dfce31c539ae418a5d3587b945
+Source0:	https://files.pythonhosted.org/packages/source/t/tpm2-pytss/tpm2_pytss-%{version}.tar.gz
+# Source0-md5:	d68827bda582608b698e2478c5cc2d3f
 URL:		https://github.com/tpm2-software/tpm2-pytss
 BuildRequires:	python3-asn1crypto
 BuildRequires:	python3-cffi >= 1.0.0
-BuildRequires:	python3-cryptography >= 3.0
-BuildRequires:	python3-devel >= 1:3.7
+BuildRequires:	python3-cryptography >= 47
+BuildRequires:	python3-devel >= 1:3.10
 BuildRequires:	python3-packaging
 BuildRequires:	python3-pkgconfig
 BuildRequires:	python3-pycparser
 BuildRequires:	python3-setuptools >= 1:44
 BuildRequires:	python3-setuptools_scm >= 3.4.3
-BuildRequires:	python3-toml
 %if %{with tests}
 # or swtpm
 BuildRequires:	ibmswtpm2
@@ -35,14 +34,14 @@ BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
 BuildRequires:	sed >= 4.0
-# 3.3/4.0 when available in PLD
-BuildRequires:	tpm2-tss-devel >= 2.4
+BuildRequires:	tpm2-tss-devel >= 4.0
 %if %{with doc}
+BuildRequires:	python3-docutils >= 0.16
 BuildRequires:	python3-myst_parser
 BuildRequires:	python3-sphinx_rtd_theme
 BuildRequires:	sphinx-pdg-3
 %endif
-Requires:	python3-modules >= 1:3.7
+Requires:	python3-modules >= 1:3.10
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -79,9 +78,9 @@ API documentation for Python tpm2-pytss module.
 Dokumentacja API modułu Pythona tpm2-pytss.
 
 %prep
-%setup -q -n tpm2-pytss-%{version}
+%setup -q -n tpm2_pytss-%{version}
 
-# broken and not used (as of 2.1.0)
+# broken and not used (as of 3.0.0)
 %{__sed} -i -e '/^\(version\|release\) = /d' docs/conf.py
 
 %build
@@ -112,7 +111,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGELOG.md LICENSE README.md
 %dir %{py3_sitedir}/tpm2_pytss
 %{py3_sitedir}/tpm2_pytss/*.py
-%attr(755,root,root) %{py3_sitedir}/tpm2_pytss/_libtpm2_pytss.abi3.so
+%{py3_sitedir}/tpm2_pytss/_libtpm2_pytss.abi3.so
 %{py3_sitedir}/tpm2_pytss/__pycache__
 %{py3_sitedir}/tpm2_pytss/internal
 %{py3_sitedir}/tpm2_pytss-%{version}-py*.egg-info
